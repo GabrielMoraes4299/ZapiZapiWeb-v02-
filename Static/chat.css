@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container-contatos{
+    width: 20vw;
+    height: 90vh;
+    background-color: rgb(62, 62, 62);
+    position: relative;
+    display: block;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 30px 0px 30px 0px;
+}
+
+.container-contatos__contato{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    padding-left: 20px;
+    gap: 40px;
+    cursor: pointer;
+}
+
+.container-contatos__contato img{
+    width: 100px;
+    height: 100px;
+}
+
+.container-mensagens{
+    width: 60vw;
+    height: 90vh;
+    background-color: black;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-mensagens input{
+    width: 80%;
+    height: 60px;
+    border-radius: 60px;
+    padding: 10px;
+    padding-left: 20px;
+    position: absolute;
+    bottom: 0px;
+    font-size: 25px;
+    margin: 20px;
+}
+
+.container-mensagens button{
+    width: 15%;
+    height: 60px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin: 20px;
+    background-color: aqua;
+}
+
+.container-contato{
+    background-color: green;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    font-size: 40px;
+    gap: 20px;
+}
+
+.container-contato img{
+    width: 100px;
+    height: 100px;
+}
+
+.container-conteudo{
+    width: 100%;
+    height: 60%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0px 20px 0px 20px;
+}
+
+.container-conteudo::-webkit-scrollbar{
+    width: 10px;
+}
+
+.container-mensagens__destinatario-conteudo{
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 30px;
+    text-align: left;
+    margin: 10px;
+}
+
+.texto-destinatario{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: aquamarine;
+}
+
+.container-mensagens__remetente-conteudo{
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 30px;
+    text-align: right;
+    margin: 10px;
+}
+
+.texto-remetente{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: aquamarine;
+}

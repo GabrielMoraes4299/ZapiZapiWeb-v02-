@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='inicio.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='chat.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Início</title>
+</head>
+<body>
+    <header class="container-header">
+        <div class="container-header__logo">
+            <img src="{{url_for('static', filename='whatsapp.png')}}" alt="Logo ZapiZapi">
+            <h1>ZapiZapi</h1>
+        </div>
+        <div class="container-header__usuario">
+            {% if campo_usuario == True %}
+            <a href="/logoff"><button>Sair</button></a>
+            {% endif %}
+
+        </div>
+    </header>
+    <section class="mensagens">
+            {% block conteudo %}
+            {% endblock %}
+    </section>
+
+    
+</body>
+</html>

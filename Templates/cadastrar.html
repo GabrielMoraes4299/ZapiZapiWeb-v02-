@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='cadastrar.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <main>
+        <div class="container-main">
+            <h1>CADASTRE-SE</h1>
+            <p id="resposta"></p>
+            <div class="form">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome">
+    
+                <label for="telefone">Telefone:</label>
+                <input type="text" name="telefone" id="telefone">
+    
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha">
+    
+                <button id="btn-cadastrar" onclick="cadastrar()">Cadastrar</button>
+                <p>Já tem uma conta?<a href="/login">Fazer Login</a></p>
+            </div>
+            
+        </div>
+    </main>
+</body>
+
+    <script type="text/javascript">
+        function cadastrar() {
+            var dados = {
+                nome:$('#nome').val(),
+                telefone:$('#telefone').val(),
+                senha:$('#senha').val()
+            }
+
+            $.ajax({
+                url: '/cadastrar',
+                type: 'POST',
+                data: JSON.stringify(dados),
+                contentType: 'application/json',
+                success: function(){
+                    $('#resposta').append('CADASTRO REALIZADO COM SUCESSO!')
+                },
+                error: function(){
+                    $('#resposta').append("ERRO AO CADASTRAR!")
+                }
+
+            })
+        }
+    </script>
+
+</html>

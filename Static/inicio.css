@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: aquamarine;
+}
+
+.container-header{
+    background-color: green;
+    display: flex;
+    width: 100vw;
+    height: 10vh;
+}
+
+.container-header__logo{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 100px;
+    width: 50%;
+    gap: 20px
+}
+
+.container-header__logo h1{
+    cursor: pointer;
+}
+
+.container-header__logo img{
+    height: 50%;
+    cursor: pointer;
+}
+
+.container-header__usuario{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 50px;
+    width: 50%;
+    padding-right: 100px;
+}
+
+.container-header__usuario button{
+    background-color: rgb(1, 175, 117);
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.container-header__usuario button:hover{
+    background-color: rgb(0, 255, 170);
+}
+
+.mensagens{
+    display: flex;
+    justify-content: center;
+}

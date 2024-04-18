@@ -1,0 +1,132 @@
+{% extends "inicio.html" %}
+{% block conteudo %}
+
+<div class="container-contatos" id="usuario">
+    <input type="text" id="pesquisa" placeholder="Pesquisa">
+</div>
+
+<div class="container-mensagens">
+    <div class="container-contato">
+        <img src="{{url_for('static', filename='usuario.png')}}" alt="Gabriel">
+        <h1 id="contato"></h1>
+    </div>
+
+    <div class="container-conteudo" id="container-conteudo">
+        
+    </div>
+
+    <input type="text" id="conteudo" placeholder="Digite sua mensagem...">
+    <button onclick="enviar_mensagem()">Enviar</button>
+</div>
+
+<script type="text/javascript">
+    var tel_destinatario = '';
+    function solicitar_usuarios(){
+        $.ajax({
+            url: '/retorna_usuarios',
+            type: 'GET',
+            success: function(usuarios){
+                for(let x = 0; x < usuarios.length; x++){
+                    $('#usuario').append(`
+                            <div class="container-contatos__contato">
+                                    <img src="{{url_for('static', filename='usuario.png')}}" alt="Contato">
+                                    <h1 id="${usuarios[x]['telefone']}">${usuarios[x]['nome']}</h1>
+                            </div>`)
+                }
+            },
+            error: function(){
+                alert(')X ERROOOOOOOOOO X(')
+            }
+        })
+    }
+
+    $(document).ready(solicitar_usuarios());
+
+    function verificar_mensagem(nome, telefone) {
+        $.ajax({
+            url: `/get/mensagens/${telefone}`,
+            type: 'GET',
+            success: function(mensagens){
+                for(let x = 0; x < mensagens.length; x++){
+                    if(mensagens[x]['nome'] != nome){
+                        $('#container-conteudo').append(`
+                            <div class="container-mensagens__remetente-conteudo">
+                                <span class="texto-remetente">${mensagens[x]['conteudo']}</span>
+                            </div>
+                        `);
+                    }else{
+                        $('#container-conteudo').append(`
+                            <div class="container-mensagens__destinatario-conteudo">
+                                <span class="texto-destinatario">${mensagens[x]['conteudo']}</span>
+                            </div>`
+                        );
+                    }
+                    document.getElementById('container-conteudo').scroll(0, 10000);
+                }
+            },
+
+            error: function(){
+                alert(')X ERROOOOOOOOOO X(');
+            }
+        })
+    }
+
+    function enviar_mensagem(){
+        var dados = {
+            conteudo: $('#conteudo').val(),
+            telefone: tel_destinatario,
+        }
+
+        document.getElementById('conteudo').value = '';
+
+        $.ajax({
+            url: '/enviar_mensagem',
+            type: 'POST',
+            data: JSON.stringify(dados),
+            contentType: 'application/json',
+            success: function(){
+                document.getElementById(dados['telefone']).click();
+                document.getElementById('conteudo').value = '';
+            },
+            error: function(){
+                
+            }
+
+        })
+    }
+
+    document.getElementById('usuario').addEventListener('click', function(e) {
+        $.ajax({
+            url: '/retorna_usuarios',
+            type: 'GET',
+            success: function(usuarios){
+                document.getElementById('container-conteudo').innerHTML = '';
+                for(let x = 0; x < usuarios.length; x++){
+                    if(usuarios[x]['nome'] == document.getElementById(e.target.id).innerText){
+                        $('#contato').text(`${usuarios[x]['nome']}`);
+                        tel_destinatario = usuarios[x]['telefone'];
+                        verificar_mensagem(usuarios[x]['nome'], usuarios[x]['telefone']);
+                    }
+                }
+            },
+            error: function(){
+                alert(')X ERROOOOOOOOOO X(');
+            }
+        });
+    });
+
+    setInterval(function(){
+        document.getElementById(tel_destinatario).click()
+    }, 5000);
+
+    function move(event) {
+        var tecla = event.key;
+        if(tecla == 'Enter'){
+            enviar_mensagem();
+        }
+    };
+
+    document.addEventListener("keydown", move);
+</script>
+ 
+{% endblock %}
